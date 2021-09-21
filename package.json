@@ -16,5 +16,8 @@
     "url": "https://github.com/Yurismm/Razor-DB/issues"
   },
   "homepage": "https://github.com/Yurismm/Razor-DB#readme",
-  "keywords": []
+  "keywords": [],
+  "dependencies": {
+    "discord.js": "^13.1.0"
+  }
 }
