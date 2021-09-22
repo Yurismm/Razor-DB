@@ -1,5 +1,3 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-
 module.exports = {
     name: 'ping',
     description: 'Ping!',

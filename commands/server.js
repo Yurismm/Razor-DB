@@ -1,12 +1,16 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { execute } = require("./ping");
-
+const { DiscordAPIError } = require("discord.js");
+const Discord = require("discord.js");
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("server")
-        .setDescription("Replies with your server infomation"),
-    async execute(interaction) {
-        await interaction.reply("The name of this server is:   " + interaction.guild.name + "\n and there is a grand total of: " + interaction.guild.memberCount + " users in this server.")
+    name: "server",
+    description: "Gives you details on your server",
+    execute(message, args) {
+        const embed1 = new Discord.MessageEmbed()
+            .setColor("#A020F0")
+            .setTitle("Server Details")
+            .setDescription("Name of this server: " + message.guild.name + "\n This server has: " + message.guild.memberCount + " members.")
+            .setFooter("Razor-DB")
+
+        message.channel.send({ embeds: [embed1] })
     }
 }
