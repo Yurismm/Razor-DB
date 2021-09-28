@@ -6,11 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Yurismm/Razor-DB.git"
-  },
-  "author": "",
+  "repository": "git+https://github.com/Yurismm/Razor-DB.git",
+  "author": "Azizah Cherie Blackwood <40805624+Yurismm@users.noreply.github.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Yurismm/Razor-DB/issues"
