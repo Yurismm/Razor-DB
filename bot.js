@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const genshindb = require('genshin-db');
 const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const { token } = require('./config.json');
@@ -9,7 +10,7 @@ client.commands = new Discord.Collection();
 
 client.once("ready", () => {
     console.log("Razor-DB is online")
-    client.user.setActivity('pure coolness', { type: 'COMPETING' });
+    client.user.setActivity('cheries weirdness', { type: 'COMPETING' });
 });
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -34,7 +35,6 @@ client.on('message', message => {
         message.reply('there was an error trying to execute that command!');
     }
 });
-
 
 
 client.login(token);
