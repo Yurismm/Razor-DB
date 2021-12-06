@@ -15,10 +15,10 @@
   "homepage": "https://github.com/Yurismm/Razor-DB#readme",
   "keywords": [],
   "dependencies": {
-    "@discordjs/builders": "^0.5.0",
+    "@discordjs/builders": "^0.9.0",
     "@discordjs/rest": "*",
     "discord-api-types": "^0.22.0",
-    "discord.js": "^13.1.0",
+    "discord.js": "^13.3.1",
     "genshin-db": "^3.10.4"
   }
 }
