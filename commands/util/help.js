@@ -28,6 +28,7 @@ module.exports = {
                     message.channel.send(`Seems like I can't DM you, ${message.author}. Do you have DMs disabled?`);
                 });
         }
+
         const name = args[0].toLowerCase();
         const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
 

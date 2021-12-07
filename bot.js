@@ -11,8 +11,6 @@ client.once("ready", () => {
     client.user.setActivity('cheries weirdness', { type: 'COMPETING' });
 });
 
-client.commands = new Discord.Collection();
-client.cooldowns = new Discord.Collection();
 
 client.commands = new Discord.Collection();
 
