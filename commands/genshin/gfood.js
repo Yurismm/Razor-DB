@@ -4,7 +4,7 @@ const genshindb = require('genshin-db');
 
 module.exports = {
     name: "gfood",
-    description: "test",
+    description: "Shows you infomation about the food you input",
     execute(message, args) {
         const ginput = args.join(" ");
 
@@ -18,6 +18,3 @@ module.exports = {
         message.channel.send({ embeds: [embed] });
     }
 }
-
-
-// wip

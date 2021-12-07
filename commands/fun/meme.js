@@ -1,10 +1,10 @@
 const https = require('https');
 const Discord = require('discord.js');
-const url = 'https://www.reddit.com/r/meme/hot/.json?limit=100'
+const url = 'https://www.reddit.com/r/dankmemes/hot/.json?limit=100'
 
 module.exports = {
     name: 'meme',
-    description: 'sends meme',
+    description: 'Sends a meme (the subreddit used here is r/dankmemes)',
     execute(message, client, args) {
 
         https.get(url, (result) => {

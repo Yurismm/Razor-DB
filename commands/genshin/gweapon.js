@@ -5,7 +5,7 @@ const fs = require('fs');
 
 module.exports = {
     name: "gweapon",
-    description: "testing genshin stuff",
+    description: "Shows you infomation relating to the weapon you have inputted.",
     execute(message, args) {
         const ginput = args.join(" ");
 

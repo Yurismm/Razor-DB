@@ -4,8 +4,8 @@ const Discord = require("discord.js");
 const fs = require('fs');
 
 module.exports = {
-    name: "gstats",
-    description: "testing genshin stuff",
+    name: "gcharacter",
+    description: "Shows you infomation on a Genshin Character.",
     execute(message, args) {
         const ginput = args.join(" ");
 
