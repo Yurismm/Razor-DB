@@ -18,14 +18,10 @@ module.exports = {
                 .setTitle('Here\'s a list of all my commands:')
                 .addFields({ name: '**Commands:**', value: commands.map(command => command.name).join(', ') }, { name: '\u200B', value: `For help on a specific command send: \`${prefix}help [command name]\`` })
 
-            return message.author.send({ embeds: [embed] })
-                .then(() => {
-                    if (message.channel.type === 'dm') return;
-                    message.channel.send(`☑️ I've sent you a DM with all of my commands, ${message.author}.`);
-                })
+            return message.channel.send({ embeds: [embed] })
                 .catch(error => {
                     console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
-                    message.channel.send(`Seems like I can't DM you, ${message.author}. Do you have DMs disabled?`);
+                    message.channel.send(`Unable to send help command at this time.`);
                 });
         }
 
@@ -44,6 +40,6 @@ module.exports = {
 
         data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
 
-        message.channel.send(data, { split: true });
+        message.channel.send(data.join(' '), { split: true });
     },
 };
