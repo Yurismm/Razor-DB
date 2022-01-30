@@ -10,6 +10,7 @@ module.exports = {
             .setTitle("Invite Link")
             .setURL("https://discord.com/oauth2/authorize?client_id=889632085076230165&permissions=0&scope=applications.commands%20bot")
             .setFooter("Razor-DB")
+
         message.channel.send({ embeds: [embed1] })
     }
 }
