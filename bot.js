@@ -9,7 +9,7 @@ const fs = require('fs');
 
 client.once("ready", () => {
     console.log("Razor-DB is online")
-    client.user.setActivity('cheries weirdness', { type: 'COMPETING' });
+    client.user.setActivity('azzys asshole', { type: 'COMPETING' });
 });
 
 
@@ -47,6 +47,7 @@ client.on('message', message => {
         }
     }
 });
+
 
 client.on('message', message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
