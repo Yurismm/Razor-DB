@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 
 module.exports = {
     name: "invite",
-    description: "Gives you details on your server",
+    description: "give invite",
     execute(message, args) {
         const embed1 = new Discord.MessageEmbed()
             .setColor("#A020F0")
