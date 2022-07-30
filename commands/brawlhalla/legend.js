@@ -4,15 +4,13 @@ const fs = require("fs");
 const { brawlapi } = require("../../config.json")
     //        fs.readFile("../../legends.json", JSON.stringify(legends, null, 4), err => {
     //          if (err) return err;
-    
+
 legends = require("../../legends.json")
 
 module.exports = {
     name: "blegend",
     decription: "Gives you infomation on a brawlhalla legend",
     execute(message, args) {
-
-
 
         const args4 = args.join(" ");
 
@@ -25,8 +23,8 @@ module.exports = {
             .setFooter("Razor-DB")
 
         message.channel.send({ embeds: [embed2] })
-    
-    
-    
+
+
+
     }
 }

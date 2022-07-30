@@ -22,6 +22,7 @@
     "discord.js": "^13.3.1",
     "genshin-db": "^3.10.4",
     "node-osu": "^2.2.1",
+    "node-valorant-api": "^0.5.0",
     "request": "^2.88.2"
   }
 }
