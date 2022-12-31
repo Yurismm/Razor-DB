@@ -8,8 +8,9 @@ const fs = require('fs');
 
 
 client.once("ready", () => {
-    console.log("Razor-DB is online")
-    client.user.setActivity('azzys asshole', { type: 'COMPETING' });
+
+    console.log("chamber is onlineee")
+    client.user.setActivity('azzys ummmm', { type: 'COMPETING' });
 });
 
 

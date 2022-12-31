@@ -12,13 +12,23 @@ module.exports = {
     category: "valorant",
     async execute(message, args, client) {
 
-        const valorant = new API(Regions.EU, APIKey, Regions.EUROPE);
-
-        valorant.ContentV1.getContent(Locales["en-US"]).then(content => {
-            console.log(content.characters.map(char => { return char.name }));
-        });
-
-
-
+        fetch('https://api.henrikdev.xyz/valorant/v1/mmr/eu/cherie/0004')
+            .then(function(response) {
+                switch (response.status) {
+                    // status "OK"
+                    case 200:
+                        return response.text();
+                        // status "Not Found"
+                    case 404:
+                        throw response;
+                }
+            })
+            .then(function(template) {
+                console.log(template);
+            })
+            .catch(function(response) {
+                // "Not Found"
+                console.log(response.statusText);
+            });
     }
 }
