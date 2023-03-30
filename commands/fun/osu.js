@@ -4,7 +4,6 @@ module.exports = {
     name: "osu",
     description: "Shows your osu stats",
     execute(message, args) {
-
         const osuname = args.join(" ");
         const embed = new Discord.MessageEmbed()
             .setColor("#A020F0")

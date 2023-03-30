@@ -10,7 +10,7 @@ const fs = require('fs');
 client.once("ready", () => {
 
     console.log("chamber is onlineee")
-    client.user.setActivity('azzys ummmm', { type: 'COMPETING' });
+    client.user.setActivity('dodge challenger', { type: 'COMPETING' });
 });
 
 
@@ -25,6 +25,8 @@ for (const folder of commandFolders) {
         client.commands.set(command.name, command);
     }
 }
+
+
 
 client.on('message', message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -48,6 +50,8 @@ client.on('message', message => {
         }
     }
 });
+
+
 
 
 client.on('message', message => {

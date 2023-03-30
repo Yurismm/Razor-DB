@@ -12,23 +12,18 @@ module.exports = {
     category: "valorant",
     async execute(message, args, client) {
 
-        fetch('https://api.henrikdev.xyz/valorant/v1/mmr/eu/cherie/0004')
-            .then(function(response) {
-                switch (response.status) {
-                    // status "OK"
-                    case 200:
-                        return response.text();
-                        // status "Not Found"
-                    case 404:
-                        throw response;
-                }
-            })
-            .then(function(template) {
-                console.log(template);
-            })
-            .catch(function(response) {
-                // "Not Found"
-                console.log(response.statusText);
-            });
+        const query = args.join("  ");
+
+
+        if (!args[0]) {
+            message.channel.send("there was no input")
+
+
+        } else {
+
+            message.channel.send(query);
+
+        }
+
     }
 }
