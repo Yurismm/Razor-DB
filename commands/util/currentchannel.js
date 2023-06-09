@@ -10,7 +10,7 @@ module.exports = {
     execute(message, args) {
         const channel = args.join(" ");
 
-        client.channels.cache.get(channel)
+        client.channels.get(channel)
 
         message.guild.channels.create(channel, {
             type: 'voice'

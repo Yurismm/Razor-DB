@@ -9,7 +9,7 @@ module.exports = {
     description: "gives role",
     execute(message, args) {
 
-        let role = message.guild.roles.cache.find(r => r.id === "901522952338677801");
+        let role = message.guild.roles.find(r => r.id === "901522952338677801");
 
 
         message.guild.members.filter(m => !m.user.bot).forEach(member => member.addRole(role))

@@ -12,7 +12,7 @@ module.exports = {
 
 
 
-        client.channels.cache.get(channel)
+        client.channels.get(channel)
 
         message.guild.channels.create("announcements", {
             type: 'voice'
