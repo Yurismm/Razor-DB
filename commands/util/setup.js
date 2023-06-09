@@ -6,7 +6,7 @@ const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD
 
 module.exports = {
     name: "cc",
-    description: "Allows you to change the name of the channel youre in",
+    description: "Allows you to change the name of the channel youre in (unneeded)",
     execute(message, args) {
         const channel = args.join(" ");
 
