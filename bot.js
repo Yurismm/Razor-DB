@@ -1,9 +1,17 @@
 const Discord = require('discord.js');
 const genshindb = require('genshin-db');
+
+
 const { Client, Intents } = require('discord.js');
+
+// v13 intents
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "DIRECT_MESSAGES", "DIRECT_MESSAGE_REACTIONS", "DIRECT_MESSAGE_TYPING"], partials: ["MESSAGE", "CHANNEL", "REACTION", "USER"] });
+
+
 const { token } = require('./config.json');
 const { prefix } = require("./config.json");
+
+
 const fs = require('fs');
 
 
