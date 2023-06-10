@@ -1,5 +1,8 @@
-const { Client, Intents } = require('discord.js');
+const { Client, Intents, Collection } = require('discord.js');
 const fs = require('fs');
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
+const { clientId, guildId, token } = require('./config.json');
 
 const client = new Client({
     intents: [
@@ -8,56 +11,56 @@ const client = new Client({
         Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
         Intents.FLAGS.DIRECT_MESSAGES,
         Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
-        Intents.FLAGS.DIRECT_MESSAGE_TYPING
+        Intents.FLAGS.DIRECT_MESSAGE_TYPING,
     ],
-    partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'USER']
+    partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'USER'],
 });
 
-const { token, prefix } = require('./config.json');
+client.commands = new Collection();
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+    const command = require(`./commands/${file}`);
+    client.commands.set(command.data.name, command);
+}
 
 client.once('ready', () => {
     console.log('chamber is onlineee');
     client.user.setActivity('dodge challenger', { type: 'COMPETING' });
 });
 
-client.commands = new Map();
-const commandFolders = fs.readdirSync('./commands');
+client.on('interactionCreate', async interaction => {
+    if (!interaction.isCommand()) return;
 
-for (const folder of commandFolders) {
-    const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
-    for (const file of commandFiles) {
-        const command = require(`./commands/${folder}/${file}`);
-        client.commands.set(command.name, command);
-    }
-}
+    const { commandName } = interaction;
 
-client.on('messageCreate', message => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-    const args = message.content.slice(prefix.length).trim().split(/ +/);
-    const commandName = args.shift().toLowerCase();
-
-    const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-
-    if (!command) return;
-
-    if (command.guildOnly && message.channel.type === 'DM') {
-        return message.reply('I can\'t execute that command inside DMs!');
-    }
-
-    if (command.permissions) {
-        const authorPerms = message.channel.permissionsFor(message.author);
-        if (!authorPerms || !authorPerms.has(command.permissions)) {
-            return message.reply('You do not have permission to use this command!');
-        }
-    }
+    if (!client.commands.has(commandName)) return;
 
     try {
-        command.execute(message, args);
+        await client.commands.get(commandName).execute(interaction);
     } catch (error) {
         console.error(error);
-        message.reply('There was an error while trying to execute that command. Please check the command line.');
+        interaction.reply({
+            content: 'There was an error while trying to execute that command.',
+            ephemeral: true,
+        });
     }
 });
+
+const rest = new REST({ version: '9' }).setToken(token);
+
+(async() => {
+    try {
+        console.log('Started refreshing application (/) commands.');
+
+        await rest.put(
+            Routes.applicationGuildCommands(clientId, guildId), { body: client.commands.map(command => command.data.toJSON()) },
+        );
+
+        console.log('Successfully registered application (/) commands.');
+    } catch (error) {
+        console.error(error);
+    }
+})();
 
 client.login(token);

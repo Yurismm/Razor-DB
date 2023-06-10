@@ -1,18 +1,16 @@
-const { MessageEmbed, ReplyMessageOptions } = require("discord.js");
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
-    name: 'ping',
-    description: 'Ping!',
-    execute(message, args) {
+    data: new SlashCommandBuilder()
+        .setName('ping')
+        .setDescription('Ping!'),
+    async execute(interaction) {
         const embed = new MessageEmbed()
             .setColor("#A020F0")
             .setDescription("pong")
             .setFooter("Razor-DB");
 
-        const replyOptions = {
-            embeds: [embed]
-        };
-
-        message.reply(replyOptions);
+        await interaction.reply({ embeds: [embed] });
     },
 };

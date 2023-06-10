@@ -1,16 +1,17 @@
-const { DiscordAPIError } = require("discord.js");
-const Discord = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 
 module.exports = {
     name: "invite",
-    description: "give invite",
-    execute(message, args) {
-        const embed1 = new Discord.MessageEmbed()
+    description: "Give invite",
+    async execute(interaction, args) {
+        const embed1 = new MessageEmbed()
             .setColor("#A020F0")
             .setTitle("Invite Link")
-            .setURL("https://discord.com/oauth2/authorize?client_id=889632085076230165&permissions=0&scope=applications.commands%20bot")
-            .setFooter("Razor-DB")
+            .setURL(
+                "https://discord.com/oauth2/authorize?client_id=889632085076230165&permissions=0&scope=applications.commands%20bot"
+            )
+            .setFooter("Razor-DB");
 
-        message.channel.send({ embeds: [embed1] })
-    }
-}
+        await interaction.reply({ embeds: [embed1] });
+    },
+};

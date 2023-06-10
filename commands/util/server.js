@@ -1,16 +1,17 @@
-const { DiscordAPIError } = require("discord.js");
-const Discord = require("discord.js");
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
-    name: "server",
-    description: "Gives you details on your server",
-    execute(message, args) {
-        const embed1 = new Discord.MessageEmbed()
+    data: new SlashCommandBuilder()
+        .setName('server')
+        .setDescription('Gives you details on your server'),
+    execute(interaction) {
+        const embed = new MessageEmbed()
             .setColor("#A020F0")
             .setTitle("Server Details")
-            .setDescription("Name of this server: " + message.guild.name + "\n This server has: " + message.guild.memberCount + " members.")
-            .setFooter("Razor-DB")
+            .setDescription(`Name of this server: ${interaction.guild.name}\nThis server has: ${interaction.guild.memberCount} members.`)
+            .setFooter("Razor-DB");
 
-        message.channel.send({ embeds: [embed1] })
-    }
-}
+        interaction.reply({ embeds: [embed] });
+    },
+};

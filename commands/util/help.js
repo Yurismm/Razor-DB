@@ -1,45 +1,45 @@
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 const { prefix } = require('../../config.json');
 
 module.exports = {
     name: 'help',
     description: 'List all of my commands or info about a specific command.',
-    aliases: ['commands'],
-    usage: '[command name]',
-    cooldown: 5,
-    execute(message, args) {
-        const data = [];
-        const { commands } = message.client;
+    options: [{
+        name: 'command',
+        type: 'STRING',
+        description: 'Name of the command to get help for (optional)',
+        required: false,
+    }, ],
+    async execute(interaction) {
+        const { commands } = interaction.client;
 
-        if (!args.length) {
+        const commandName = interaction.options.getString('command');
+        const command = commands.get(commandName) || commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
 
-            const embed = new Discord.MessageEmbed()
+        if (!commandName) {
+            const embed = new MessageEmbed()
                 .setTitle('Here\'s a list of all my commands:')
-                .addFields({ name: '**Commands:**', value: commands.map(command => command.name).join(', ') }, { name: '\u200B', value: `For help on a specific command send: \`${prefix}help [command name]\`` })
+                .addField('**Commands:**', commands.map((cmd) => cmd.name).join(', '))
+                .addField('\u200B', `For help on a specific command use \`/help [command name]\``);
 
-            return message.channel.send({ embeds: [embed] })
-                .catch(error => {
-                    console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
-                    message.channel.send(`Unable to send help command at this time.`);
-                });
+            return interaction.reply({ embeds: [embed] });
         }
-
-        const name = args[0].toLowerCase();
-        const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
 
         if (!command) {
-            return message.reply('that\'s not a valid command!');
+            return interaction.reply('That\'s not a valid command!');
         }
 
-        data.push(`**Name:** ${command.name}`);
+        const embed = new MessageEmbed()
+            .setTitle(`Command: ${command.name}`)
+            .addField('**Description:**', command.description || 'No description available')
+            .addField('**Usage:**', `${prefix}${command.name} ${command.usage || ''}`)
+            .addField('**Cooldown:**', `${command.cooldown || 3} second(s)`);
 
-        if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`);
-        if (command.description) data.push(`**Description:** ${command.description}`);
-        if (command.usage) data.push(`**Usage:** ${prefix}${command.name} ${command.usage}`);
+        if (command.aliases) {
+            embed.addField('**Aliases:**', command.aliases.join(', '));
+        }
 
-        data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
-
-        message.channel.send(data.join(' '), { split: true });
+        await interaction.reply({ embeds: [embed] });
     },
 };
