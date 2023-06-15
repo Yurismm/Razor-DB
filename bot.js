@@ -16,8 +16,11 @@ const client = new Client({
     partials: ['MESSAGE', 'CHANNEL', 'REACTION', 'USER'],
 });
 
+// Create a collection to store commands
 client.commands = new Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+// Register commands by requiring the command files
+const commandFiles = ['coinflip.js', 'gfood.js', 'gweapon.js', 'help.js', 'invite.js', 'ping.js', 'meme.js', 'osu.js'];
 
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
