@@ -31,12 +31,3 @@ module.exports = {
         await interaction.reply({ embeds: [embed] });
     },
 };
-
-// Create a collection to store commands
-client.commands = new Collection();
-
-// Register the command
-client.commands.set(module.exports.data.name, module.exports);
-
-// Export the client object
-module.exports.client = client;
